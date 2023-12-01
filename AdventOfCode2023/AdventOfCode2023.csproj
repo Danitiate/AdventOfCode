@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Solutions\Day_1\1.in" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Solutions\Day_1\1.in">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

@@ -35,6 +35,11 @@ ____________________________________________________________");
             PrintBreak();
         }
 
+        public static void PrintSolution(string output)
+        {
+            Console.WriteLine($"The solution is: \n{output}");
+        }
+
         public static void PrintGoodBye()
         {
             Console.WriteLine("Thank you, and good bye! :)");

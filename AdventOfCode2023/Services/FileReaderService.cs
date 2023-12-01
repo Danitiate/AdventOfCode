@@ -6,7 +6,7 @@ namespace AdventOfCode2023.Services
 {
     public class FileReaderService
     {
-        public List<string> ReadFile(string filePath)
+        public static List<string> ReadFile(string filePath)
         {
             var lines = new List<string>();
             try
