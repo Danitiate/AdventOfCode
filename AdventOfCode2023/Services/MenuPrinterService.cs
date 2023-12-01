@@ -37,7 +37,11 @@ ____________________________________________________________");
 
         public static void PrintSolution(string output)
         {
-            Console.WriteLine($"The solution is: \n{output}");
+            Console.WriteLine("The solution is:");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(output);
+            Console.ForegroundColor = ConsoleColor.White;
+            PrintBreak();
         }
 
         public static void PrintGoodBye()
@@ -48,6 +52,15 @@ ____________________________________________________________");
         private static void PrintBreak()
         {
             Console.WriteLine("\n");
+        }
+
+        public static void MultipleParts(int parts)
+        {
+            Console.WriteLine("There are multiple parts to this solution. Which one do you want to test?");
+            for (int i = 0; i < parts; i++)
+            {
+                Console.WriteLine("Part " + (i + 1));
+            }
         }
     }
 }
