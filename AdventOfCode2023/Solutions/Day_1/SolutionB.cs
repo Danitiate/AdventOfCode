@@ -37,25 +37,45 @@ namespace AdventOfCode2023.Solutions.Day_1
         public void Solve()
         {
             var stringInputs = FileReaderService.ReadFile(FILE_PATH);
+            SolutionUsingReplace(stringInputs);
+            SolutionUsingRegex(stringInputs);
+            SolutionUsingLoops(stringInputs);
+        }
+
+        private void SolutionUsingReplace(List<string> stringInputs)
+        {
             var sum = 0;
             foreach (var stringInput in stringInputs)
             {
-                var digit = GetTwoDigitNumber(stringInput);
+                var digit = GetDigitsFromStringUsingReplace(stringInput);
                 sum += digit;
             }
 
-            MenuPrinterService.PrintSolution(sum.ToString());
+            MenuPrinterService.PrintSolution($"SolutionUsingReplace: {sum}");
         }
 
-        private int GetTwoDigitNumber(string stringInput)
+        private void SolutionUsingRegex(List<string> stringInputs)
         {
-            //return GetDigitsFromStringUsingReplace(stringInput);
+            var sum = 0;
+            foreach (var stringInput in stringInputs)
+            {
+                var digit = GetDigitsFromStringUsingAdvancedRegex(stringInput);
+                sum += digit;
+            }
 
-            // Alternative:
-            //return GetDigitsFromStringUsingAdvancedRegex(stringInput);
+            MenuPrinterService.PrintSolution($"SolutionUsingRegex: {sum}");
+        }
 
-            // Alternative:
-            return GetDigitsFromStringUsingLoops(stringInput);
+        private void SolutionUsingLoops(List<string> stringInputs)
+        {
+            var sum = 0;
+            foreach (var stringInput in stringInputs)
+            {
+                var digit = GetDigitsFromStringUsingLoops(stringInput);
+                sum += digit;
+            }
+
+            MenuPrinterService.PrintSolution($"SolutionUsingLoops: {sum}");
         }
 
         private int GetDigitsFromStringUsingReplace(string stringInput)

@@ -1,6 +1,7 @@
 ﻿using AdventOfCode2023.Models;
 using AdventOfCode2023.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -22,22 +23,32 @@ namespace AdventOfCode2023.Solutions.Day_1
         public void Solve()
         {
             var stringInputs = FileReaderService.ReadFile(FILE_PATH);
+            SolutionUsingRegex(stringInputs);
+            SolutionUsingLoops(stringInputs);
+        }
+
+        private void SolutionUsingRegex(List<string> stringInputs)
+        {
             var sum = 0;
             foreach (var stringInput in stringInputs)
             {
-                var digit = GetTwoDigitNumber(stringInput);
+                var digit = GetDigitsFromStringUsingRegex(stringInput);
                 sum += digit;
             }
 
-            MenuPrinterService.PrintSolution(sum.ToString());
+            MenuPrinterService.PrintSolution($"SolutionUsingRegex: {sum}");
         }
 
-        private int GetTwoDigitNumber(string stringInput)
+        private void SolutionUsingLoops(List<string> stringInputs)
         {
-            return GetDigitsFromStringUsingRegex(stringInput);
+            var sum = 0;
+            foreach (var stringInput in stringInputs)
+            {
+                var digit = GetDigitsFromStringUsingLoops(stringInput);
+                sum += digit;
+            }
 
-            // Alternative:
-            //return GetDigitsFromStringUsingLoops(stringInput);
+            MenuPrinterService.PrintSolution($"SolutionUsingLoops: {sum}");
         }
 
         private int GetDigitsFromStringUsingRegex(string stringInput)

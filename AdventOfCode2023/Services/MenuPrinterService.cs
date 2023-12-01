@@ -37,11 +37,9 @@ ____________________________________________________________");
 
         public static void PrintSolution(string output)
         {
-            Console.WriteLine("The solution is:");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(output);
             Console.ForegroundColor = ConsoleColor.White;
-            PrintBreak();
         }
 
         public static void PrintGoodBye()
