@@ -1,5 +1,4 @@
 ﻿using AdventOfCode2023.Models;
-using System;
 
 namespace AdventOfCode2023.Services
 {
@@ -10,7 +9,7 @@ namespace AdventOfCode2023.Services
             var inputAsInt = int.Parse(userInput);
             switch(inputAsInt)
             {
-                case 1: return new Day1.Solution();
+                case 1: return new Solutions.Day_1.Solution();
                 default: return null;
             }
         }

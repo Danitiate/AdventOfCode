@@ -1,6 +1,6 @@
 ﻿using AdventOfCode2023.Models;
 
-namespace AdventOfCode2023.Day1
+namespace AdventOfCode2023.Solutions.Day_1
 {
     public class Solution : ISolution
     {
