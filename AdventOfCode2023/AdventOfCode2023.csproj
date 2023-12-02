@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <None Remove="Solutions\Day_1\1.in" />
+    <None Remove="Solutions\Day_2\2.in" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Solutions\Day_2\2.in">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Solutions\Day_1\1.in">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
