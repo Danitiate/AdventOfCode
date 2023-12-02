@@ -12,7 +12,7 @@ namespace AdventOfCode2023.Services
             switch (inputAsInt)
             {
                 case 1: solutions.AddRange([new Solutions.Day_1.SolutionA(), new Solutions.Day_1.SolutionB()]); break;
-                case 2: solutions.AddRange([new Solutions.Day_2.SolutionA()]); break;
+                case 2: solutions.AddRange([new Solutions.Day_2.SolutionA(), new Solutions.Day_2.SolutionB()]); break;
             }
 
             return solutions;
