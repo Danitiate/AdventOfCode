@@ -1,6 +1,8 @@
 ﻿using AdventOfCode2023.Models;
 using AdventOfCode2023.Services;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AdventOfCode2023.Solutions.Day_4
 {
@@ -25,7 +27,27 @@ namespace AdventOfCode2023.Solutions.Day_4
         private int GetSumOfMatchingNumbers(List<string> scratchCards)
         {
             var sum = 0;
+            foreach (var scratchCard in scratchCards)
+            {
+                var numbers = scratchCard.Substring(scratchCard.IndexOf(":") + 1).Split("|");
+                var winningNumbers = numbers[0].Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                var currentNumbers = numbers[1].Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                sum += CalculateScratchCardPoints(winningNumbers, currentNumbers);
+            }
+
             return sum;
+        }
+
+        private int CalculateScratchCardPoints(string[] winningNumbers, string[] currentNumbers)
+        {
+            var matchingNumbers = currentNumbers.Where(n => winningNumbers.Contains(n)).ToList();
+            var amountOfMatches = matchingNumbers.Count;
+            if (amountOfMatches == 0)
+            {
+                return 0;
+            }
+
+            return (int)Math.Pow(2, amountOfMatches - 1);
         }
     }
 }
