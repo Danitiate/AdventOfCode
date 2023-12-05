@@ -7,16 +7,17 @@ using System.Linq;
 namespace AdventOfCode2023.Solutions.Day_5
 {
     /**
-     *  PART 1
-     *  1. Parse first line of input into a list of seeds
-     *  2. Parse rest of inputs into several lists of SourceDestinationMap objects
-     *  3. Need some helper logic:
-     *      3a. Given a source number, does there exist a map that contain it? If false, return the source number itself
-     *      3b. If 3a is true, given a source number, get the destination number.
-     *  4. For each seed and each map, figure out its location and store it in a list
-     *  5. Find the location with the lowest value and return
+     *  PART 2
+     *  1. Solution should follow same logic as Part 1. Only need to adjust how we get the list of seeds
+     *  2. Parse every odd number into a startIndex and every even number as a range. Add to list every value between startIndex to startIndex + range
+     *  3. Parse rest of inputs into several lists of SourceDestinationMap objects
+     *  4. Need some helper logic:
+     *      4a. Given a source number, does there exist a map that contain it? If false, return the source number itself
+     *      4b. If 3a is true, given a source number, get the destination number.
+     *  5. For each seed and each map, figure out its location and store it in a list
+     *  6. Find the location with the lowest value and return
      **/
-    public class SolutionA : ISolution
+    public class SolutionB : ISolution
     {
         private const string FILE_PATH = "Solutions/Day_5/5.in";
 
@@ -72,8 +73,7 @@ namespace AdventOfCode2023.Solutions.Day_5
         private List<long> GetSeedsFromAlmanac(string seeds)
         {
             var numbersString = seeds.Split("seeds: ", StringSplitOptions.RemoveEmptyEntries)[0];
-            var numbers = numbersString.Split(" ");
-            return numbers.Select(n => long.Parse(n)).ToList();
+            throw new NotImplementedException();
         }
 
         private List<SourceDestinationMap> GetSourceToDestinationMapFromAlmanac(List<string> almanac, string map)
