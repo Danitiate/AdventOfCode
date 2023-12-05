@@ -31,27 +31,35 @@ namespace AdventOfCode2023.Solutions.Day_5
         {
             var locations = new List<long>();
             var seeds = GetSeedsFromAlmanac(almanac[0]);
-            var seedToSoilMap = GetSourceToDestinationMapFromAlmanac(almanac, "seed-to-soil map:");
-            var soilToFertilizerMap = GetSourceToDestinationMapFromAlmanac(almanac, "soil-to-fertilizer map:");
-            var fertilizerToWaterMap = GetSourceToDestinationMapFromAlmanac(almanac, "fertilizer-to-water map:");
-            var waterToLightMap = GetSourceToDestinationMapFromAlmanac(almanac, "water-to-light map:");
-            var lightToTemperatureMap = GetSourceToDestinationMapFromAlmanac(almanac, "light-to-temperature map:");
-            var temperatureToHumidityMap = GetSourceToDestinationMapFromAlmanac(almanac, "temperature-to-humidity map:");
-            var humidityToLocationMap = GetSourceToDestinationMapFromAlmanac(almanac, "humidity-to-location map:");
-
-            foreach(var seed in seeds)
+            var maps = new List<List<SourceDestinationMap>>()
             {
-                var soilDestination = GetDestinationOfSource(seed, seedToSoilMap);
-                var fertilizerDestination = GetDestinationOfSource(soilDestination, soilToFertilizerMap);
-                var waterDestination = GetDestinationOfSource(fertilizerDestination, fertilizerToWaterMap);
-                var lightDestination = GetDestinationOfSource(waterDestination, waterToLightMap);
-                var temperatureDestination = GetDestinationOfSource(lightDestination, lightToTemperatureMap);
-                var humidityDestination = GetDestinationOfSource(temperatureDestination, temperatureToHumidityMap);
-                var locationDestination = GetDestinationOfSource(humidityDestination, humidityToLocationMap);
-                locations.Add(locationDestination);
+                GetSourceToDestinationMapFromAlmanac(almanac, "seed-to-soil map:"),
+                GetSourceToDestinationMapFromAlmanac(almanac, "soil-to-fertilizer map:"),
+                GetSourceToDestinationMapFromAlmanac(almanac, "fertilizer-to-water map:"),
+                GetSourceToDestinationMapFromAlmanac(almanac, "water-to-light map:"),
+                GetSourceToDestinationMapFromAlmanac(almanac, "light-to-temperature map:"),
+                GetSourceToDestinationMapFromAlmanac(almanac, "temperature-to-humidity map:"),
+                GetSourceToDestinationMapFromAlmanac(almanac, "humidity-to-location map:")
+            };
+
+            foreach (var seed in seeds)
+            {
+                var location = GetLocationOfSeed(seed, maps);
+                locations.Add(location);
             }
 
             return locations.Min();
+        }
+
+        private long GetLocationOfSeed(long seed, List<List<SourceDestinationMap>> mapsList)
+        {
+            var previousLocation = seed;
+            foreach (var maps in mapsList)
+            {
+                previousLocation = GetDestinationOfSource(previousLocation, maps);
+            }
+
+            return previousLocation;
         }
 
         private long GetDestinationOfSource(long source, List<SourceDestinationMap> sourceDestinationMaps)
