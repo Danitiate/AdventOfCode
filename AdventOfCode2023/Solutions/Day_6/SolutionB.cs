@@ -1,18 +1,17 @@
 ﻿using AdventOfCode2023.Models;
 using AdventOfCode2023.Services;
-using System;
 using System.Collections.Generic;
 
 namespace AdventOfCode2023.Solutions.Day_6
 {
     /**
-     *  PART 1
-     *  1. Create a dictionary with key time and value distance
+     *  PART 2
+     *  1. Create a tuple with key time and value distance. Append all numbers together before adding.
      *  2. For each key, determine how many ways the values 1..N-1 will create a distance larger than the value.
      *  3. Each race can be calculated by multiplying the amount of seconds held with the amount of seconds left. 
      *  4. Multiply all the values together
      **/
-    public class SolutionA : ISolution
+    public class SolutionB : ISolution
     {
         private const string FILE_PATH = "Solutions/Day_6/6.in";
 
@@ -23,38 +22,28 @@ namespace AdventOfCode2023.Solutions.Day_6
             MenuPrinterService.PrintSolution(uniqueWaysToWin.ToString());
         }
 
-        private int GetUniqueWaysToWin(List<string> stringInputs)
+        private long GetUniqueWaysToWin(List<string> stringInputs)
         {
-            var totalUniqueWaysToWin = 1;
-            var races = ParseRacesDictionary(stringInputs);
-            foreach (var race in races) 
-            { 
-                var uniqueWaysToWin = CalculateUniqueWaysToWinRace(race.Key, race.Value);
-                totalUniqueWaysToWin *= uniqueWaysToWin;
-            }
-            return totalUniqueWaysToWin;
+            var race = ParseRaceTuple(stringInputs);
+            return CalculateUniqueWaysToWinRace(race.Item1, race.Item2);
         }
 
-        private Dictionary<int, int> ParseRacesDictionary(List<string> stringInputs)
+        private (long, long) ParseRaceTuple(List<string> stringInputs)
         {
-            var raceDictionary = new Dictionary<int, int>();
-            var times = stringInputs[0].Split("Time:")[1].Split(" ", StringSplitOptions.RemoveEmptyEntries);
-            var distances = stringInputs[1].Split("Distance:")[1].Split(" ", StringSplitOptions.RemoveEmptyEntries);
-            for (int i = 0; i < times.Length; i++)
-            {
-                var time = Int32.Parse(times[i]);
-                var distance = Int32.Parse(distances[i]);
-                raceDictionary[time] = distance;
-            }
-
-            return raceDictionary;
+            var times = stringInputs[0].Split("Time:")[1];
+            var distances = stringInputs[1].Split("Distance:")[1];
+            times = times.Replace(" ", "");
+            distances = distances.Replace(" ", "");
+            var time = long.Parse(times);
+            var distance = long.Parse(distances);
+            return (time, distance);
         }
 
-        private int CalculateUniqueWaysToWinRace(int maximumTime, int targetDistance)
+        private long CalculateUniqueWaysToWinRace(long maximumTime, long targetDistance)
         {
             var firstWinIndex = maximumTime - 1;
-            var lastWinIndex = 1;
-            for (var timeHeld = 1; timeHeld <= firstWinIndex; timeHeld++)
+            var lastWinIndex = 1L;
+            for (var timeHeld = 1L; timeHeld <= firstWinIndex; timeHeld++)
             {
                 var distance = CalculateDistance(maximumTime, timeHeld);
                 if (distance > targetDistance)
@@ -77,7 +66,7 @@ namespace AdventOfCode2023.Solutions.Day_6
             return lastWinIndex - firstWinIndex + 1;
         }
 
-        private int CalculateDistance(int maximumTime, int timeHeld)
+        private long CalculateDistance(long maximumTime, long timeHeld)
         {
             var timeLeft = maximumTime - timeHeld;
             return timeLeft * timeHeld;            
