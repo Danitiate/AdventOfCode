@@ -1,5 +1,6 @@
 ﻿using AdventOfCode2023.Models;
 using AdventOfCode2023.Services;
+using System;
 using System.Collections.Generic;
 
 namespace AdventOfCode2023.Solutions.Day_6
@@ -7,9 +8,9 @@ namespace AdventOfCode2023.Solutions.Day_6
     /**
      *  PART 2
      *  1. Create a tuple with key time and value distance. Append all numbers together before adding.
-     *  2. For each key, determine how many ways the values 1..N-1 will create a distance larger than the value.
-     *  3. Each race can be calculated by multiplying the amount of seconds held with the amount of seconds left. 
-     *  4. Multiply all the values together
+     *  2. Calculate the amount of unique ways to win
+     *  3. The amount of possible solutions can be calculated using parabolas: https://en.wikipedia.org/wiki/Quadratic_formula
+     *  4. Return the result of lower and upper bounds after calculation
      **/
     public class SolutionB : ISolution
     {
@@ -41,35 +42,18 @@ namespace AdventOfCode2023.Solutions.Day_6
 
         private long CalculateUniqueWaysToWinRace(long maximumTime, long targetDistance)
         {
-            var firstWinIndex = maximumTime - 1;
-            var lastWinIndex = 1L;
-            for (var timeHeld = 1L; timeHeld <= firstWinIndex; timeHeld++)
-            {
-                var distance = CalculateDistance(maximumTime, timeHeld);
-                if (distance > targetDistance)
-                {
-                    firstWinIndex = timeHeld;
-                    break;
-                }
-            }
-
-            for (var timeHeld = maximumTime - 1; timeHeld >= lastWinIndex; timeHeld--)
-            {
-                var distance = CalculateDistance(maximumTime, timeHeld);
-                if (distance > targetDistance)
-                {
-                    lastWinIndex = timeHeld;
-                    break;
-                }
-            }
-
-            return lastWinIndex - firstWinIndex + 1;
-        }
-
-        private long CalculateDistance(long maximumTime, long timeHeld)
-        {
-            var timeLeft = maximumTime - timeHeld;
-            return timeLeft * timeHeld;            
+            /** 
+             * Quadratic Formula: (-B +/- sqrt(B^2 - 4AC) / 2A
+             * A is a constant, in this case it is simply 1 and can be ignored
+             * B is our maximumTime
+             * C is our targetDistance
+             */
+            var root = Math.Sqrt(Math.Pow(maximumTime, 2) - (4.0 * targetDistance));
+            var quadraticFormula1 = -maximumTime + root / (-2);
+            var quadraticFormula2 = -maximumTime - root / (-2);
+            long firstWin = (long)Math.Ceiling(quadraticFormula1);
+            long secondWin = (long)Math.Ceiling(quadraticFormula2);
+            return secondWin - firstWin;
         }
     }
 }
