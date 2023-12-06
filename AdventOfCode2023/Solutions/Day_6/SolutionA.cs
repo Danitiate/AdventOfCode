@@ -1,5 +1,6 @@
 ﻿using AdventOfCode2023.Models;
 using AdventOfCode2023.Services;
+using System;
 using System.Collections.Generic;
 
 namespace AdventOfCode2023.Solutions.Day_6
@@ -22,10 +23,64 @@ namespace AdventOfCode2023.Solutions.Day_6
             MenuPrinterService.PrintSolution(uniqueWaysToWin.ToString());
         }
 
-        private int GetUniqueWaysToWin(List<string> races)
+        private int GetUniqueWaysToWin(List<string> stringInputs)
         {
-            var uniqueWaysToWin = 0;
-            return uniqueWaysToWin;
+            var totalUniqueWaysToWin = 1;
+            var races = ParseRacesDictionary(stringInputs);
+            foreach (var race in races) 
+            { 
+                var uniqueWaysToWin = CalculateUniqueWaysToWinRace(race.Key, race.Value);
+                totalUniqueWaysToWin *= uniqueWaysToWin;
+            }
+            return totalUniqueWaysToWin;
+        }
+
+        private Dictionary<int, int> ParseRacesDictionary(List<string> stringInputs)
+        {
+            var raceDictionary = new Dictionary<int, int>();
+            var times = stringInputs[0].Split("Time:")[1].Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            var distances = stringInputs[1].Split("Distance:")[1].Split(" ", StringSplitOptions.RemoveEmptyEntries); ;
+            for (int i = 0; i < times.Length; i++)
+            {
+                var time = Int32.Parse(times[i]);
+                var distance = Int32.Parse(distances[i]);
+                raceDictionary[time] = distance;
+            }
+
+            return raceDictionary;
+        }
+
+        private int CalculateUniqueWaysToWinRace(int maximumTime, int targetDistance)
+        {
+            var firstWinIndex = maximumTime - 1;
+            var lastWinIndex = 1;
+            for (var timeHeld = 1; timeHeld <= firstWinIndex; timeHeld++)
+            {
+                var distance = CalculateDistance(maximumTime, timeHeld);
+                if (distance > targetDistance)
+                {
+                    firstWinIndex = timeHeld;
+                    break;
+                }
+            }
+
+            for (var timeHeld = maximumTime - 1; timeHeld >= lastWinIndex; timeHeld--)
+            {
+                var distance = CalculateDistance(maximumTime, timeHeld);
+                if (distance > targetDistance)
+                {
+                    lastWinIndex = timeHeld;
+                    break;
+                }
+            }
+
+            return lastWinIndex - firstWinIndex + 1;
+        }
+
+        private int CalculateDistance(int maximumTime, int timeHeld)
+        {
+            var timeLeft = maximumTime - timeHeld;
+            return timeLeft * timeHeld;            
         }
     }
 }
