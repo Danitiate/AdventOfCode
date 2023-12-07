@@ -1,5 +1,4 @@
 ﻿using AdventOfCode2023.Models;
-using AdventOfCode2023.Services;
 using System;
 using System.Collections.Generic;
 
@@ -12,21 +11,18 @@ namespace AdventOfCode2023.Solutions.Day_6
      *  3. Each race can be calculated by multiplying the amount of seconds held with the amount of seconds left. 
      *  4. Multiply all the values together
      **/
-    public class SolutionA : ISolution
+    public class SolutionA : Solution
     {
-        private const string FILE_PATH = "Solutions/Day_6/6.in";
-
-        public void Solve()
+        protected override string GetSolutionOutput()
         {
-            var stringInputs = FileReaderService.ReadFile(FILE_PATH);
-            var uniqueWaysToWin = GetUniqueWaysToWin(stringInputs);
-            MenuPrinterService.PrintSolution(uniqueWaysToWin.ToString());
+            var uniqueWaysToWin = GetUniqueWaysToWin();
+            return uniqueWaysToWin.ToString();
         }
 
-        private int GetUniqueWaysToWin(List<string> stringInputs)
+        private int GetUniqueWaysToWin()
         {
             var totalUniqueWaysToWin = 1;
-            var races = ParseRacesDictionary(stringInputs);
+            var races = ParseRacesDictionary();
             foreach (var race in races) 
             { 
                 var uniqueWaysToWin = CalculateUniqueWaysToWinRace(race.Key, race.Value);
@@ -35,7 +31,7 @@ namespace AdventOfCode2023.Solutions.Day_6
             return totalUniqueWaysToWin;
         }
 
-        private Dictionary<int, int> ParseRacesDictionary(List<string> stringInputs)
+        private Dictionary<int, int> ParseRacesDictionary()
         {
             var raceDictionary = new Dictionary<int, int>();
             var times = stringInputs[0].Split("Time:")[1].Split(" ", StringSplitOptions.RemoveEmptyEntries);

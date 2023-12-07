@@ -1,5 +1,4 @@
 ﻿using AdventOfCode2023.Models;
-using AdventOfCode2023.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +17,8 @@ namespace AdventOfCode2023.Solutions.Day_1
      *  4. Append integers to a two digit number
      *  5. Sum values
      * */
-    public class SolutionB : ISolution
+    public class SolutionB : Solution
     {
-        private const string FILE_PATH = "Solutions/Day_1/1.in";
         private readonly Dictionary<string, char> NUMBER_TO_DIGIT_DICTIONARY = new Dictionary<string, char>()
         {
             { "one", '1' },
@@ -34,15 +32,15 @@ namespace AdventOfCode2023.Solutions.Day_1
             { "nine", '9' }
         };
 
-        public void Solve()
+        protected override string GetSolutionOutput()
         {
-            var stringInputs = FileReaderService.ReadFile(FILE_PATH);
-            SolutionUsingReplace(stringInputs);
-            SolutionUsingRegex(stringInputs);
-            SolutionUsingLoops(stringInputs);
+            var output1 = SolutionUsingReplace();
+            var output2 = SolutionUsingRegex();
+            var output3 = SolutionUsingLoops();
+            return output1 + "\n" + output2 + "\n" + output3;
         }
 
-        private void SolutionUsingReplace(List<string> stringInputs)
+        private string SolutionUsingReplace()
         {
             var sum = 0;
             foreach (var stringInput in stringInputs)
@@ -51,10 +49,10 @@ namespace AdventOfCode2023.Solutions.Day_1
                 sum += digit;
             }
 
-            MenuPrinterService.PrintSolution($"SolutionUsingReplace: {sum}");
+            return $"SolutionUsingReplace: {sum}";
         }
 
-        private void SolutionUsingRegex(List<string> stringInputs)
+        private string SolutionUsingRegex()
         {
             var sum = 0;
             foreach (var stringInput in stringInputs)
@@ -63,10 +61,10 @@ namespace AdventOfCode2023.Solutions.Day_1
                 sum += digit;
             }
 
-            MenuPrinterService.PrintSolution($"SolutionUsingRegex: {sum}");
+            return $"SolutionUsingRegex: {sum}";
         }
 
-        private void SolutionUsingLoops(List<string> stringInputs)
+        private string SolutionUsingLoops()
         {
             var sum = 0;
             foreach (var stringInput in stringInputs)
@@ -75,7 +73,7 @@ namespace AdventOfCode2023.Solutions.Day_1
                 sum += digit;
             }
 
-            MenuPrinterService.PrintSolution($"SolutionUsingLoops: {sum}");
+            return $"SolutionUsingLoops: {sum}";
         }
 
         private int GetDigitsFromStringUsingReplace(string stringInput)

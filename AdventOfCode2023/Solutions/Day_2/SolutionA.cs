@@ -1,5 +1,4 @@
 ﻿using AdventOfCode2023.Models;
-using AdventOfCode2023.Services;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -15,9 +14,8 @@ namespace AdventOfCode2023.Solutions.Day_2
      *      4a. The maximum limit will be a dictionary that we can compare to. We simply feed the color and get the maximum value back.
      *  5. Sum the value of all the game IDs.
      **/
-    public class SolutionA : ISolution
+    public class SolutionA : Solution
     {
-        private const string FILE_PATH = "Solutions/Day_2/2.in";
         private readonly Dictionary<string, int> CUBE_CONFIGURATION_DICTIONARY = new Dictionary<string, int>()
         {
             { "red", 12 },
@@ -25,14 +23,13 @@ namespace AdventOfCode2023.Solutions.Day_2
             { "blue", 14 }
         };
 
-        public void Solve()
+        protected override string GetSolutionOutput()
         {
-            var stringInputs = FileReaderService.ReadFile(FILE_PATH);
-            var sum = GetSumOfPossibleGames(stringInputs);
-            MenuPrinterService.PrintSolution(sum.ToString());
+            var sum = GetSumOfPossibleGames();
+            return sum.ToString();
         }
 
-        private int GetSumOfPossibleGames(List<string> stringInputs)
+        private int GetSumOfPossibleGames()
         {
             var sum = 0;
             for (int currentGame = 1; currentGame <= stringInputs.Count; currentGame++)

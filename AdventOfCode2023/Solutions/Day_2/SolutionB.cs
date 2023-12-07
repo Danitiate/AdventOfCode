@@ -1,5 +1,4 @@
 ﻿using AdventOfCode2023.Models;
-using AdventOfCode2023.Services;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -17,18 +16,15 @@ namespace AdventOfCode2023.Solutions.Day_2
      *  7. Return the dictionary and multiply all its values
      *  8. Sum the value of all the product values in step 7
      **/
-    public class SolutionB : ISolution
+    public class SolutionB : Solution
     {
-        private const string FILE_PATH = "Solutions/Day_2/2.in";
-
-        public void Solve()
+        protected override string GetSolutionOutput()
         {
-            var stringInputs = FileReaderService.ReadFile(FILE_PATH);
-            var sum = GetSumOfPowerOfEachGame(stringInputs);
-            MenuPrinterService.PrintSolution(sum.ToString());
+            var sum = GetSumOfPowerOfEachGame();
+            return sum.ToString();
         }
 
-        private int GetSumOfPowerOfEachGame(List<string> stringInputs)
+        private int GetSumOfPowerOfEachGame()
         {
             var sum = 0;
             for (int currentGame = 1; currentGame <= stringInputs.Count; currentGame++)

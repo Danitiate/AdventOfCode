@@ -1,5 +1,4 @@
 ﻿using AdventOfCode2023.Models;
-using AdventOfCode2023.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,18 +18,15 @@ namespace AdventOfCode2023.Solutions.Day_7
     *  5. For each CamelCardGame in the list, calculate its winnings by multiplying its rank (index + 1) with the bid: (index + 1) * bid = winnings
     *  6. Sum up all winnings
     **/
-    public class SolutionB : ISolution
+    public class SolutionB : Solution
     {
-        private const string FILE_PATH = "Solutions/Day_7/7.in";
-
-        public void Solve()
+        protected override string GetSolutionOutput()
         {
-            var stringInputs = FileReaderService.ReadFile(FILE_PATH);
-            var uniqueWaysToWin = SumCamelCardHandsPlayed(stringInputs);
-            MenuPrinterService.PrintSolution(uniqueWaysToWin.ToString());
+            var uniqueWaysToWin = SumCamelCardHandsPlayed();
+            return uniqueWaysToWin.ToString();
         }
 
-        private int SumCamelCardHandsPlayed(List<string> stringInputs)
+        private int SumCamelCardHandsPlayed()
         {
             var totalWinnings = 0;
             List<CamelCardGame> camelCardHands = ParseCamelCardGames(stringInputs);

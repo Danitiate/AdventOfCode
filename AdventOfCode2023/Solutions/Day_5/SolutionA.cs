@@ -1,5 +1,4 @@
 ﻿using AdventOfCode2023.Models;
-using AdventOfCode2023.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,30 +15,27 @@ namespace AdventOfCode2023.Solutions.Day_5
      *  4. For each seed and each map, figure out its location and store it in a list
      *  5. Find the location with the lowest value and return
      **/
-    public class SolutionA : ISolution
+    public class SolutionA : Solution
     {
-        private const string FILE_PATH = "Solutions/Day_5/5.in";
-
-        public void Solve()
+        protected override string GetSolutionOutput()
         {
-            var stringInputs = FileReaderService.ReadFile(FILE_PATH);
-            var lowestLocationNumber = GetLowestLocationNumber(stringInputs);
-            MenuPrinterService.PrintSolution(lowestLocationNumber.ToString());
+            var lowestLocationNumber = GetLowestLocationNumber();
+            return lowestLocationNumber.ToString();
         }
 
-        private long GetLowestLocationNumber(List<string> almanac)
+        private long GetLowestLocationNumber()
         {
             var locations = new List<long>();
-            var seeds = GetSeedsFromAlmanac(almanac[0]);
+            var seeds = GetSeedsFromAlmanac();
             var maps = new List<List<SourceDestinationMap>>()
             {
-                GetSourceToDestinationMapFromAlmanac(almanac, "seed-to-soil map:"),
-                GetSourceToDestinationMapFromAlmanac(almanac, "soil-to-fertilizer map:"),
-                GetSourceToDestinationMapFromAlmanac(almanac, "fertilizer-to-water map:"),
-                GetSourceToDestinationMapFromAlmanac(almanac, "water-to-light map:"),
-                GetSourceToDestinationMapFromAlmanac(almanac, "light-to-temperature map:"),
-                GetSourceToDestinationMapFromAlmanac(almanac, "temperature-to-humidity map:"),
-                GetSourceToDestinationMapFromAlmanac(almanac, "humidity-to-location map:")
+                GetSourceToDestinationMapFromAlmanac("seed-to-soil map:"),
+                GetSourceToDestinationMapFromAlmanac("soil-to-fertilizer map:"),
+                GetSourceToDestinationMapFromAlmanac("fertilizer-to-water map:"),
+                GetSourceToDestinationMapFromAlmanac("water-to-light map:"),
+                GetSourceToDestinationMapFromAlmanac("light-to-temperature map:"),
+                GetSourceToDestinationMapFromAlmanac("temperature-to-humidity map:"),
+                GetSourceToDestinationMapFromAlmanac("humidity-to-location map:")
             };
 
             foreach (var seed in seeds)
@@ -77,20 +73,21 @@ namespace AdventOfCode2023.Solutions.Day_5
             return sourceMap.GetDestinationForSource(source);
         }
 
-        private List<long> GetSeedsFromAlmanac(string seeds)
+        private List<long> GetSeedsFromAlmanac()
         {
+            var seeds = stringInputs[0];
             var numbersString = seeds.Split("seeds: ", StringSplitOptions.RemoveEmptyEntries)[0];
             var numbers = numbersString.Split(" ");
             return numbers.Select(n => long.Parse(n)).ToList();
         }
 
-        private List<SourceDestinationMap> GetSourceToDestinationMapFromAlmanac(List<string> almanac, string map)
+        private List<SourceDestinationMap> GetSourceToDestinationMapFromAlmanac(string map)
         {
             var sourceDestinationMaps = new List<SourceDestinationMap>();
-            var startIndex = almanac.IndexOf(map) + 1;
-            for (int i = startIndex; i < almanac.Count; i++)
+            var startIndex = stringInputs.IndexOf(map) + 1;
+            for (int i = startIndex; i < stringInputs.Count; i++)
             {
-                var sourceDestinationMapString = almanac[i];
+                var sourceDestinationMapString = stringInputs[i];
                 var sourceDestinationMapStringArray = sourceDestinationMapString.Split(" ", StringSplitOptions.RemoveEmptyEntries);
                 if (sourceDestinationMapStringArray.Length == 3)
                 {

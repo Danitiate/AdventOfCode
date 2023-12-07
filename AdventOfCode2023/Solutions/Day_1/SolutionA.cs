@@ -1,7 +1,5 @@
 ﻿using AdventOfCode2023.Models;
-using AdventOfCode2023.Services;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -16,18 +14,16 @@ namespace AdventOfCode2023.Solutions.Day_1
      *  3. Then we need to append those digits so that we get a two digit number.
      *  4. Then we need to sum the value of all those numbers.
      **/
-    public class SolutionA : ISolution
+    public class SolutionA : Solution
     {
-        private const string FILE_PATH = "Solutions/Day_1/1.in";
-
-        public void Solve()
+        protected override string GetSolutionOutput()
         {
-            var stringInputs = FileReaderService.ReadFile(FILE_PATH);
-            SolutionUsingRegex(stringInputs);
-            SolutionUsingLoops(stringInputs);
+            var output1 = SolutionUsingRegex();
+            var output2 = SolutionUsingLoops();
+            return output1 + "\n" + output2;
         }
 
-        private void SolutionUsingRegex(List<string> stringInputs)
+        private string SolutionUsingRegex()
         {
             var sum = 0;
             foreach (var stringInput in stringInputs)
@@ -36,10 +32,10 @@ namespace AdventOfCode2023.Solutions.Day_1
                 sum += digit;
             }
 
-            MenuPrinterService.PrintSolution($"SolutionUsingRegex: {sum}");
+            return $"SolutionUsingRegex: {sum}";
         }
 
-        private void SolutionUsingLoops(List<string> stringInputs)
+        private string SolutionUsingLoops()
         {
             var sum = 0;
             foreach (var stringInput in stringInputs)
@@ -48,7 +44,7 @@ namespace AdventOfCode2023.Solutions.Day_1
                 sum += digit;
             }
 
-            MenuPrinterService.PrintSolution($"SolutionUsingLoops: {sum}");
+            return $"SolutionUsingLoops: {sum}";
         }
 
         private int GetDigitsFromStringUsingRegex(string stringInput)

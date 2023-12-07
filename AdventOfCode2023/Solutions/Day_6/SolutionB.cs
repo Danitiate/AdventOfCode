@@ -1,7 +1,5 @@
 ﻿using AdventOfCode2023.Models;
-using AdventOfCode2023.Services;
 using System;
-using System.Collections.Generic;
 
 namespace AdventOfCode2023.Solutions.Day_6
 {
@@ -12,24 +10,21 @@ namespace AdventOfCode2023.Solutions.Day_6
      *  3. The amount of possible solutions can be calculated using parabolas: https://en.wikipedia.org/wiki/Quadratic_formula
      *  4. Return the result of lower and upper bounds after calculation
      **/
-    public class SolutionB : ISolution
+    public class SolutionB : Solution
     {
-        private const string FILE_PATH = "Solutions/Day_6/6.in";
-
-        public void Solve()
+        protected override string GetSolutionOutput()
         {
-            var stringInputs = FileReaderService.ReadFile(FILE_PATH);
-            var uniqueWaysToWin = GetUniqueWaysToWin(stringInputs);
-            MenuPrinterService.PrintSolution(uniqueWaysToWin.ToString());
+            var uniqueWaysToWin = GetUniqueWaysToWin();
+            return uniqueWaysToWin.ToString();
         }
 
-        private long GetUniqueWaysToWin(List<string> stringInputs)
+        private long GetUniqueWaysToWin()
         {
-            var race = ParseRaceTuple(stringInputs);
+            var race = ParseRaceTuple();
             return CalculateUniqueWaysToWinRace(race.Item1, race.Item2);
         }
 
-        private (long, long) ParseRaceTuple(List<string> stringInputs)
+        private (long, long) ParseRaceTuple()
         {
             var times = stringInputs[0].Split("Time:")[1];
             var distances = stringInputs[1].Split("Distance:")[1];

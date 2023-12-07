@@ -1,5 +1,4 @@
 ﻿using AdventOfCode2023.Models;
-using AdventOfCode2023.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,20 +12,17 @@ namespace AdventOfCode2023.Solutions.Day_4
      *  3. Iterate through each copy and the amount won to calculate the amount of scratch cards
      *  4. Sum the value for each iteration
      **/
-    public class SolutionB : ISolution
+    public class SolutionB : Solution
     {
-        private const string FILE_PATH = "Solutions/Day_4/4.in";
-
-        public void Solve()
+        protected override string GetSolutionOutput()
         {
-            var stringInputs = FileReaderService.ReadFile(FILE_PATH);
-            var sum = GetAmountOfScratchCards(stringInputs);
-            MenuPrinterService.PrintSolution(sum.ToString());
+            var sum = GetAmountOfScratchCards();
+            return sum.ToString();
         }
 
-        public int GetAmountOfScratchCards(List<string> scratchCards)
+        public int GetAmountOfScratchCards()
         {
-            var scratchCardsWonAmountDictionary = PopulateScratchCardsDictionary(scratchCards);
+            var scratchCardsWonAmountDictionary = PopulateScratchCardsDictionary(stringInputs);
             var totalAmountOfCopies = scratchCardsWonAmountDictionary.ToDictionary(kv => kv.Key, kv => 0);
             for (var i = 1; i <= scratchCardsWonAmountDictionary.Count(); i++)
             {

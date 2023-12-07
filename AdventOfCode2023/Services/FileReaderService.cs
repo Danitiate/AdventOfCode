@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace AdventOfCode2023.Services
 {
@@ -13,15 +14,8 @@ namespace AdventOfCode2023.Services
             {
                 using (var streamReader = new StreamReader(filePath))
                 {
-                    var currentLine = "";
-                    while (currentLine != null)
-                    {
-                        currentLine = streamReader.ReadLine();
-                        if (currentLine != null)
-                        {
-                            lines.Add(currentLine);
-                        }
-                    }
+                    var fileContent = streamReader.ReadToEnd();
+                    lines = fileContent.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
                 }
             }
             catch (IOException ex)

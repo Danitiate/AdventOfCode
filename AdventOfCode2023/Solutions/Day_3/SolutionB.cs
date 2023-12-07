@@ -1,5 +1,4 @@
 ﻿using AdventOfCode2023.Models;
-using AdventOfCode2023.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +14,12 @@ namespace AdventOfCode2023.Solutions.Day_3
      *  6. Multiply the numbers together if there are exactly 2 numbers
      *  7. Sum up all the products calculated in step 6
      **/
-    public class SolutionB : ISolution
+    public class SolutionB : Solution
     {
-        private const string FILE_PATH = "Solutions/Day_3/3.in";
-        private List<string> stringInputs = new List<string>();
-
-        public void Solve()
+        protected override string GetSolutionOutput()
         {
-            stringInputs = FileReaderService.ReadFile(FILE_PATH);
             var sum = GetSumOfGearRatios();
-            MenuPrinterService.PrintSolution(sum.ToString());
+            return sum.ToString();
         }
 
         private int GetSumOfGearRatios()

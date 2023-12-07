@@ -1,7 +1,5 @@
 ﻿using AdventOfCode2023.Models;
-using AdventOfCode2023.Services;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace AdventOfCode2023.Solutions.Day_4
@@ -13,21 +11,18 @@ namespace AdventOfCode2023.Solutions.Day_4
      *  3. The value of this list is equal to 2^N-1, where N represent the amount of matching numbers and N >= 1
      *  4. Return the sum of matching number values
      **/
-    public class SolutionA : ISolution
+    public class SolutionA : Solution
     {
-        private const string FILE_PATH = "Solutions/Day_4/4.in";
-
-        public void Solve()
+        protected override string GetSolutionOutput()
         {
-            var stringInputs = FileReaderService.ReadFile(FILE_PATH);
-            var sum = GetSumOfMatchingNumbers(stringInputs);
-            MenuPrinterService.PrintSolution(sum.ToString());
+            var sum = GetSumOfMatchingNumbers();
+            return sum.ToString();
         }
 
-        private int GetSumOfMatchingNumbers(List<string> scratchCards)
+        private int GetSumOfMatchingNumbers()
         {
             var sum = 0;
-            foreach (var scratchCard in scratchCards)
+            foreach (var scratchCard in stringInputs)
             {
                 var numbers = scratchCard.Substring(scratchCard.IndexOf(":") + 1).Split("|");
                 var winningNumbers = numbers[0].Split(" ", StringSplitOptions.RemoveEmptyEntries);

@@ -1,7 +1,5 @@
 ﻿using AdventOfCode2023.Models;
-using AdventOfCode2023.Services;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -18,16 +16,12 @@ namespace AdventOfCode2023.Solutions.Day_3
      *  7. Sum up this value to total
      *  8. Mark this digit as "used" by replacing the digits with "."
      **/
-    public class SolutionA : ISolution
+    public class SolutionA : Solution
     {
-        private const string FILE_PATH = "Solutions/Day_3/3.in";
-        private List<string> stringInputs = new List<string>();
-
-        public void Solve()
+        protected override string GetSolutionOutput()
         {
-            stringInputs = FileReaderService.ReadFile(FILE_PATH);
             var sum = GetSumOfNumbersAdjacentToSymbols();
-            MenuPrinterService.PrintSolution(sum.ToString());
+            return sum.ToString();
         }
 
         private int GetSumOfNumbersAdjacentToSymbols()
