@@ -131,27 +131,38 @@ namespace AdventOfCode2023.Solutions.Day_7
 
             private CardHand GetCardHand()
             {
-                if (IsFiveOfAKind())
+                var jokers = Hand.Where(c => c == 'J').Count();
+                var mostCommonCards = Hand
+                    .Where(character => character != 'J')
+                    .GroupBy(character => character)
+                    .Select(group => group.Count())
+                    .OrderByDescending(count => count)
+                    .ToList();
+
+                var mostCommonCardCount = mostCommonCards.FirstOrDefault();
+                var secondMostCommonCardCount = mostCommonCards.Skip(1).FirstOrDefault();
+
+                if (IsFiveOfAKind(mostCommonCardCount, jokers))
                 {
                     return CardHand.FIVE_OF_A_KIND;
                 }
-                if (IsFourOfAKind())
+                if (IsFourOfAKind(mostCommonCardCount, jokers))
                 {
                     return CardHand.FOUR_OF_A_KIND;
                 }
-                if (IsFullHouse())
+                if (IsFullHouse(mostCommonCardCount, secondMostCommonCardCount, jokers))
                 {
                     return CardHand.FULL_HOUSE;
                 }
-                if (IsThreeOfAKind())
+                if (IsThreeOfAKind(mostCommonCardCount, jokers))
                 {
                     return CardHand.THREE_OF_A_KIND;
                 }
-                if (IsTwoPairs())
+                if (IsTwoPairs(mostCommonCardCount, secondMostCommonCardCount))
                 {
                     return CardHand.TWO_PAIRS;
                 }
-                if (IsOnePair())
+                if (IsOnePair(mostCommonCardCount, secondMostCommonCardCount, jokers))
                 {
                     return CardHand.ONE_PAIR;
                 }
@@ -159,80 +170,34 @@ namespace AdventOfCode2023.Solutions.Day_7
                 return CardHand.HIGH_CARD;
             }
 
-            private bool IsFiveOfAKind()
+            private bool IsFiveOfAKind(int mostCommonCardCount, int jokers)
             {
-                var charCount = Hand
-                    .Where(c => c != 'J')
-                    .GroupBy(c => c)
-                    .Select(g => new { Char = g.Key, Count = g.Count() })
-                    .OrderByDescending(x => x.Count)
-                    .ToList();
-
-                var jokers = Hand.Where(c => c == 'J').Count();
-                return jokers == 5 || charCount[0].Count == 5 || charCount[0].Count + jokers == 5;
+                return mostCommonCardCount + jokers == 5;
             }
 
-            private bool IsFourOfAKind()
+            private bool IsFourOfAKind(int mostCommonCardCount, int jokers)
             {
-                var charCount = Hand
-                    .Where(c => c != 'J')
-                    .GroupBy(c => c)
-                    .Select(g => new { Char = g.Key, Count = g.Count() })
-                    .OrderByDescending(x => x.Count)
-                    .ToList();
-
-                var jokers = Hand.Where(c => c == 'J').Count();
-                return charCount[0].Count == 4 || charCount[0].Count + jokers == 4;
+                return mostCommonCardCount + jokers == 4;
             }
 
-            private bool IsFullHouse()
+            private bool IsFullHouse(int mostCommonCardCount, int secondMostCommonCardCount, int jokers)
             {
-                var charCount = Hand
-                    .Where(c => c != 'J')
-                    .GroupBy(c => c)
-                    .Select(g => new { Char = g.Key, Count = g.Count() })
-                    .OrderByDescending(x => x.Count)
-                    .ToList();
-
-                var jokers = Hand.Where(c => c == 'J').Count();
-                return charCount[0].Count == 3 && charCount[1].Count == 2 || charCount[0].Count + jokers == 3 && charCount[1].Count == 2;
+                return mostCommonCardCount + jokers == 3 && secondMostCommonCardCount == 2;
             }
 
-            private bool IsThreeOfAKind()
+            private bool IsThreeOfAKind(int mostCommonCardCount, int jokers)
             {
-                var charCount = Hand
-                    .Where(c => c != 'J')
-                    .GroupBy(c => c)
-                    .Select(g => new { Char = g.Key, Count = g.Count() })
-                    .OrderByDescending(x => x.Count)
-                    .First();
-
-                var jokers = Hand.Where(c => c == 'J').Count();
-                return charCount.Count == 3 || charCount.Count + jokers == 3;
+                return mostCommonCardCount + jokers == 3;
             }
 
-            private bool IsTwoPairs()
+            private bool IsTwoPairs(int mostCommonCardCount, int secondMostCommonCardCount)
             {
-                var charCount = Hand
-                    .GroupBy(c => c)
-                    .Select(g => new { Char = g.Key, Count = g.Count() })
-                    .OrderByDescending(x => x.Count)
-                    .ToList();
-
-                return charCount[0].Count == 2 && charCount[1].Count == 2;
+                return mostCommonCardCount == 2 && secondMostCommonCardCount == 2;
             }
 
-            private bool IsOnePair()
+            private bool IsOnePair(int mostCommonCardCount, int secondMostCommonCardCount, int jokers)
             {
-                var charCount = Hand
-                    .Where(c => c != 'J')
-                    .GroupBy(c => c)
-                    .Select(g => new { Char = g.Key, Count = g.Count() })
-                    .OrderByDescending(x => x.Count)
-                    .ToList();
-
-                var jokers = Hand.Where(c => c == 'J').Count();
-                return charCount[0].Count == 2 && charCount[1].Count == 1 || charCount[0].Count + jokers == 2;
+                return mostCommonCardCount + jokers == 2 && secondMostCommonCardCount == 1;
             }
         }
 
