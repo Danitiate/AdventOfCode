@@ -67,9 +67,9 @@ namespace AdventOfCode2023
                 if (selectedSolutions.Count > 1)
                 {
                     MenuPrinterService.MultipleParts(selectedSolutions.Count);
-                    UserInput = Console.ReadLine();
                     while(true)
                     {
+                        UserInput = Console.ReadLine();
                         UserInput = UserInput.Trim().ToUpper();
                         if (UserInput == "Q")
                         {
