@@ -1,6 +1,6 @@
 ﻿using AdventOfCode2023.Models;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AdventOfCode2023.Solutions.Day_8
 {
@@ -9,8 +9,8 @@ namespace AdventOfCode2023.Solutions.Day_8
      *  1. Figure out what operations are needed
      *  2. Create a dictionary of a tuple, containing two string values left and right
      *  3. Find all starting positions (Keys in the dictionary that end with "A") and store these in a list
-     *  4. Loop through each operation until a solution is found, counting each step on the way
-     *  5. A solution is found when the list defined in step 3 all end with "Z"
+     *  4. For each starting position, find the solution following the algorithm created in Part 1
+     *  5. Find the least common multiple of all the solutions found in step 4. This will be the amount of steps required when all solutions have the same ending
      **/
     public class SolutionB : Solution
     {
@@ -20,7 +20,7 @@ namespace AdventOfCode2023.Solutions.Day_8
             return amountOfStepsRequired.ToString();
         }
 
-        private int CountAmountOfStepsRequired()
+        private long CountAmountOfStepsRequired()
         {
             var operations = ParseOperationsFromInput();
             var leftRightMap = ParseLeftRightMapFromInput();
@@ -56,10 +56,64 @@ namespace AdventOfCode2023.Solutions.Day_8
             return leftRightMap;
         }
 
-        private int TraverseMap(string operations, Dictionary<string, (string, string)> leftRightMap)
+        private long TraverseMap(string operations, Dictionary<string, (string, string)> leftRightMap)
         {
             var amountOfSteps = 0;
-            return amountOfSteps;
+            var startingPositions = GetStartingPositionsFromMap(leftRightMap);
+            var amountOfStepsRequiredForEachSolution = new List<long>();
+            for (int i = 0; i < startingPositions.Count; i++)
+            {
+                var currentPosition = startingPositions[i];
+                for (int j = 0; j <= operations.Length; j++)
+                {
+                    if (currentPosition.Last() == 'Z')
+                    {
+                        amountOfStepsRequiredForEachSolution.Add(amountOfSteps);
+                        amountOfSteps = 0;
+                        break;
+                    }
+                    else if (j == operations.Length)
+                    {
+                        j = -1;
+                        continue;
+                    }
+
+                    amountOfSteps++;
+                    var operation = operations[j];
+                    if (operation == 'L')
+                    {
+                        currentPosition = leftRightMap[currentPosition].Item1;
+                    }
+                    else
+                    {
+                        currentPosition = leftRightMap[currentPosition].Item2;
+                    }
+                }
+            }
+
+            return FindLeastCommonMultiple(amountOfStepsRequiredForEachSolution);
+        }
+
+        private List<string> GetStartingPositionsFromMap(Dictionary<string, (string, string)> leftRightMap)
+        {
+            return leftRightMap.Keys.Where(k => k.Last() == 'A').ToList();
+        }
+
+        private long FindLeastCommonMultiple(List<long> amountOfStepsRequiredForEachSolution)
+        {
+            return amountOfStepsRequiredForEachSolution.Aggregate((sum, value) => sum * value / GetGreatedCommonDenominator(sum, value));
+        }
+
+        private long GetGreatedCommonDenominator(long n1, long n2)
+        {
+            if (n2 == 0)
+            {
+                return n1;
+            }
+            else
+            {
+                return GetGreatedCommonDenominator(n2, n1 % n2);
+            }
         }
     }
 }
