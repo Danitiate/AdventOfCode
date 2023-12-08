@@ -1,15 +1,18 @@
 ﻿using AdventOfCode2023.Models;
+using System;
 using System.Collections.Generic;
 
 namespace AdventOfCode2023.Solutions.Day_8
 {
     /**
-     *  PART 1
+     *  PART 2
      *  1. Figure out what operations are needed
      *  2. Create a dictionary of a tuple, containing two string values left and right
-     *  3. Loop through each operation until a solution is found, counting each step on the way
+     *  3. Find all starting positions (Keys in the dictionary that end with "A") and store these in a list
+     *  4. Loop through each operation until a solution is found, counting each step on the way
+     *  5. A solution is found when the list defined in step 3 all end with "Z"
      **/
-    public class SolutionA : Solution
+    public class SolutionB : Solution
     {
         protected override string GetSolutionOutput()
         {
@@ -56,31 +59,6 @@ namespace AdventOfCode2023.Solutions.Day_8
         private int TraverseMap(string operations, Dictionary<string, (string, string)> leftRightMap)
         {
             var amountOfSteps = 0;
-            var currentPosition = "AAA";
-            for (int i = 0; i <= operations.Length; i++)
-            {
-                if (currentPosition == "ZZZ")
-                {
-                    break;
-                }
-                else if (i == operations.Length)
-                {
-                    i = -1;
-                    continue;
-                }
-
-                amountOfSteps++;
-                var operation = operations[i];
-                if (operation == 'L')
-                {
-                    currentPosition = leftRightMap[currentPosition].Item1;
-                }
-                else
-                {
-                    currentPosition = leftRightMap[currentPosition].Item2;
-                }
-            }
-
             return amountOfSteps;
         }
     }
