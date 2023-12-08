@@ -14,6 +14,7 @@
     <None Remove="Solutions\Day_5\5.in" />
     <None Remove="Solutions\Day_6\6.in" />
     <None Remove="Solutions\Day_7\7.in" />
+    <None Remove="Solutions\Day_8\8.in" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +39,8 @@
     <Content Include="Solutions\Day_7\7.in">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Solutions\Day_8\8.in">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
-
 </Project>

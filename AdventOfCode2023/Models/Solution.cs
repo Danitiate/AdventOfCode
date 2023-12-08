@@ -8,7 +8,7 @@ namespace AdventOfCode2023.Models
     {
         protected List<string> stringInputs = new List<string>();
 
-        public virtual void Solve()
+        public void Solve()
         {
             var filePath = GetFilePath();
             stringInputs = FileReaderService.ReadFile(filePath);
