@@ -21,6 +21,7 @@ namespace AdventOfCode2023.Services
                 case 8: solutions.AddRange([new Solutions.Day_8.SolutionA(), new Solutions.Day_8.SolutionB()]); break;
                 case 9: solutions.AddRange([new Solutions.Day_9.SolutionA(), new Solutions.Day_9.SolutionB()]); break;
                 case 10: solutions.AddRange([new Solutions.Day_10.SolutionA(), new Solutions.Day_10.SolutionB()]); break;
+                case 11: solutions.AddRange([new Solutions.Day_11.SolutionA(), new Solutions.Day_11.SolutionB()]); break;
             }
 
             return solutions;
