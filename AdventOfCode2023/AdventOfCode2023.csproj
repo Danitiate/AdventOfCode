@@ -21,9 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Solutions\Day_11\11.in">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Solutions\Day_1\1.in">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -54,5 +51,11 @@
     <Content Include="Solutions\Day_10\10.in">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Solutions\Day_11\11.in">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+	<Content Include="Solutions\Day_12\12.in">
+		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
   </ItemGroup>
 </Project>
