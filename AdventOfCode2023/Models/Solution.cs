@@ -1,5 +1,6 @@
 ﻿using AdventOfCode2023.Services;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace AdventOfCode2023.Models
@@ -12,8 +13,21 @@ namespace AdventOfCode2023.Models
         {
             var filePath = GetFilePath();
             stringInputs = FileReaderService.ReadFile(filePath);
-            var output = GetSolutionOutput();
-            MenuPrinterService.PrintSolution(output);
+            if (stringInputs.Count > 1) 
+            { 
+                var output = GetSolutionOutput();
+                MenuPrinterService.PrintSolution(output);
+            }
+            else
+            {
+                MenuPrinterService.PrintMissingInput(filePath);
+            }
+        }
+
+        public string TestSolve(List<string> testStringInputs)
+        {
+            stringInputs = testStringInputs;
+            return GetSolutionOutput();
         }
 
         private string GetFilePath()

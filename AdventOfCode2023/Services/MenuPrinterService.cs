@@ -42,6 +42,13 @@ ____________________________________________________________");
             Console.ForegroundColor = ConsoleColor.White;
         }
 
+        public static void PrintMissingInput(string filepath)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"You need to provide your puzzle input to {filepath}");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
         public static void PrintGoodBye()
         {
             Console.WriteLine("Thank you, and good bye! :)");
