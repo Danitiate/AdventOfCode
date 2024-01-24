@@ -23,5 +23,80 @@ namespace AdventOfCode2023Tests
 
             Assert.Equal("21", result);
         }
+
+        [Fact]
+        public void SolutionB1()
+        {
+            var sut = new SolutionB();
+
+            var result = sut.TestSolve(testStringInput);
+
+            Assert.Equal("525152", result);
+        }
+
+        [Fact]
+        public void SolutionB2()
+        {
+            var sut = new SolutionB();
+            List<string> testStringInput = new List<string>
+            {
+                "???.### 1,1,3"
+            };
+            var result = sut.TestSolve(testStringInput);
+
+            Assert.Equal("1", result);
+        }
+
+        [Fact]
+        public void SolutionB3()
+        {
+            var sut = new SolutionB();
+            List<string> testStringInput = new List<string>
+            {
+                ".??..??...?##. 1,1,3"
+            };
+            var result = sut.TestSolve(testStringInput);
+
+            Assert.Equal("16384", result);
+        }
+
+        [Fact]
+        public void SolutionB4()
+        {
+            var sut = new SolutionB();
+            List<string> testStringInput = new List<string>
+            {
+                "?#?#?#?#?#?#?#? 1,3,1,6"
+            };
+            var result = sut.TestSolve(testStringInput);
+
+            Assert.Equal("1", result);
+        }
+
+        [Fact]
+        public void SolutionB5()
+        {
+            var sut = new SolutionB();
+            List<string> testStringInput = new List<string>
+            {
+                "????.#...#... 4,1,1"
+            };
+            var result = sut.TestSolve(testStringInput);
+
+            Assert.Equal("16", result);
+        }
+
+        [Fact]
+        public void SolutionB6()
+        {
+            var sut = new SolutionB();
+            List<string> testStringInput = new List<string>
+            {
+                "????.######..#####. 1,6,5"
+            };
+            var result = sut.TestSolve(testStringInput);
+
+            Assert.Equal("2500", result);
+        }
     }
 }
