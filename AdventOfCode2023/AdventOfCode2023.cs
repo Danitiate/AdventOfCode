@@ -70,7 +70,7 @@ namespace AdventOfCode2023
                     while(true)
                     {
                         UserInput = Console.ReadLine();
-                        UserInput = UserInput.Trim().ToUpper();
+                        UserInput = UserInput!.Trim().ToUpper();
                         if (UserInput == "Q")
                         {
                             return State.EXIT;

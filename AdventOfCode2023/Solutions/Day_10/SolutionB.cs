@@ -143,15 +143,15 @@ namespace AdventOfCode2023.Solutions.Day_10
             {
                 value = stringInputs[coordinates.Item2].ElementAt(coordinates.Item1);
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
             return value;
         }
 
         private Pipe FindNextPipe(Pipe pipe)
         {
             var adjacentPipes = FindConnectedPipes(pipe);
-            var beforeCompareCoordinates = adjacentPipes.Where(p => p.Coordinates != pipe.PreviousPipe.Coordinates).ToList();
-            var nextPipe = adjacentPipes.First(p => p.Coordinates != pipe.PreviousPipe.Coordinates);
+            var beforeCompareCoordinates = adjacentPipes.Where(p => p.Coordinates != pipe.PreviousPipe!.Coordinates).ToList();
+            var nextPipe = adjacentPipes.First(p => p.Coordinates != pipe.PreviousPipe!.Coordinates);
             nextPipe.PreviousPipe = pipe;
             return nextPipe;
         }
@@ -222,15 +222,6 @@ namespace AdventOfCode2023.Solutions.Day_10
             var coordinatesIsOnTheSameLine = x0y0.Item2 == coordinates.Item2 && x1y1.Item2 == coordinates.Item2;
             var xCoordinatesIsBetweenTwoPoints = (x0y0.Item1 > coordinates.Item1) != (x1y1.Item1 > coordinates.Item1);
             return coordinatesIsOnTheSameLine && xCoordinatesIsBetweenTwoPoints;
-        }
-
-        internal class Pipe()
-        {
-            public (int, int) Coordinates { get; set; }
-            public char PipeShape { get; set; }
-            public int DistanceFromStartingPoint { get; set; }
-            public Pipe? PreviousPipe { get; set; }
-            public Pipe? NextPipe { get; set; }
         }
     }
 }

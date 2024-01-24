@@ -127,11 +127,5 @@ namespace AdventOfCode2023.Solutions.Day_12
 
             return true;
         }
-
-        internal class SpringRow()
-        {
-            public string SpringConditions { get; set; }
-            public List<int> GroupSizes { get; set; }
-        }
     }
 }

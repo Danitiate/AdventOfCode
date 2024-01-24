@@ -38,7 +38,7 @@ ____________________________________________________________");
         public static void PrintSolution(string output)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(output);
+            Console.WriteLine(">>> " + output + " <<<");
             Console.ForegroundColor = ConsoleColor.White;
         }
 
@@ -66,6 +66,25 @@ ____________________________________________________________");
             {
                 Console.WriteLine("Part " + (i + 1));
             }
+        }
+
+        public static void PrintComputationTime(double computationTime)
+        {
+            Console.Write("Computation time (ms): ");
+            if (computationTime < 500)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+            }
+            else if(computationTime < 2500)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+            }
+            Console.WriteLine(computationTime);
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }

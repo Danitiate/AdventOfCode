@@ -94,11 +94,5 @@ namespace AdventOfCode2023.Solutions.Day_12
             Cache[$"{springRow.SpringConditions}_{string.Join('_', springRow.GroupSizes)}"] = result;
             return result;
         }
-
-        internal class SpringRow()
-        {
-            public string SpringConditions { get; set; }
-            public List<int> GroupSizes { get; set; }
-        }
     }
 }

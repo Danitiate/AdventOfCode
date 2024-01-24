@@ -113,26 +113,17 @@ namespace AdventOfCode2023.Solutions.Day_10
             {
                 value = stringInputs[coordinates.Item2].ElementAt(coordinates.Item1);
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
             return value;
         }
 
         private Pipe FindNextPipe(Pipe pipe)
         {
             var adjacentPipes = FindConnectedPipes(pipe);
-            var beforeCompareCoordinates = adjacentPipes.Where(p => p.Coordinates != pipe.PreviousPipe.Coordinates).ToList();
-            var nextPipe = adjacentPipes.First(p => p.Coordinates != pipe.PreviousPipe.Coordinates);
+            var beforeCompareCoordinates = adjacentPipes.Where(p => p.Coordinates != pipe.PreviousPipe!.Coordinates).ToList();
+            var nextPipe = adjacentPipes.First(p => p.Coordinates != pipe.PreviousPipe!.Coordinates);
             nextPipe.PreviousPipe = pipe;
             return nextPipe;
-        }
-
-        internal class Pipe()
-        {
-            public (int, int) Coordinates { get; set; }
-            public char PipeShape { get; set; }
-            public int DistanceFromStartingPoint { get; set; }
-            public Pipe? PreviousPipe { get; set; }
-            public Pipe? NextPipe { get; set; }
         }
     }
 }
