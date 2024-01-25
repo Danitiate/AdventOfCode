@@ -46,5 +46,15 @@ namespace AdventOfCode2023Tests
 
             Assert.Equal("4", result);
         }
+
+        [Fact]
+        public void SolutionB1()
+        {
+            var sut = new SolutionB();
+
+            var result = sut.TestSolve(testStringInput);
+
+            Assert.Equal("400", result);
+        }
     }
 }
