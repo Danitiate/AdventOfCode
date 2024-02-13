@@ -22,13 +22,67 @@ namespace AdventOfCode2023Tests
         };
 
         [Fact]
-        public void SolutionA()
+        public void SolutionA1()
         {
             var sut = new SolutionA();
 
             var result = sut.TestSolve(testStringInput);
 
             Assert.Equal("102", result);
+        }
+
+        [Fact]
+        public void SolutionA2()
+        {
+            var sut = new SolutionA();
+            testStringInput = new List<string>
+            {
+                "11111",
+                "22221",
+                "33331",
+                "22221",
+                "11111"
+            };
+
+            var result = sut.TestSolve(testStringInput);
+
+            Assert.Equal("9", result);
+        }
+
+        [Fact]
+        public void SolutionA3()
+        {
+            var sut = new SolutionA();
+            testStringInput = new List<string>
+            {
+                "12222",
+                "12222",
+                "11111",
+                "12222",
+                "12222"
+            };
+
+            var result = sut.TestSolve(testStringInput);
+
+            Assert.Equal("11", result);
+        }
+
+        [Fact]
+        public void SolutionA4()
+        {
+            var sut = new SolutionA();
+            testStringInput = new List<string>
+            {
+                "1111",
+                "4491",
+                "2221",
+                "2221",
+                "2291"
+            };
+
+            var result = sut.TestSolve(testStringInput);
+
+            Assert.Equal("11", result);
         }
     }
 }
