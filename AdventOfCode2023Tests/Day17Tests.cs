@@ -84,5 +84,15 @@ namespace AdventOfCode2023Tests
 
             Assert.Equal("11", result);
         }
+
+        [Fact]
+        public void SolutionB()
+        {
+            var sut = new SolutionB();
+
+            var result = sut.TestSolve(testStringInput);
+
+            Assert.Equal("94", result);
+        }
     }
 }
