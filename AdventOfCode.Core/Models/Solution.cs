@@ -1,8 +1,6 @@
-﻿using AdventOfCode2023.Services;
-using System.Collections.Generic;
-using System.Linq;
+﻿using AdventOfCode.Core.Services;
 
-namespace AdventOfCode2023.Models
+namespace AdventOfCode.Core.Models
 {
     public abstract class Solution : ISolution
     {

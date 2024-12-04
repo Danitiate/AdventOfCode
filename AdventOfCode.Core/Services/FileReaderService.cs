@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-namespace AdventOfCode2023.Services
+﻿namespace AdventOfCode.Core.Services
 {
     public class FileReaderService
     {

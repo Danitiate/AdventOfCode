@@ -1,26 +1,26 @@
-﻿using AdventOfCode2023.Models;
-using AdventOfCode2023.Services;
-using System;
+﻿using AdventOfCode.Core.Models;
+using AdventOfCode.Core.Services;
+using AdventOfCode2023.Solutions;
 
-namespace AdventOfCode2023
+namespace AdventOfCode.CLI
 {
-    public class AdventOfCode2023
+    public class AdventOfCodeCLI
     {
         private static string? UserInput { get; set; }
 
         private static void Main(string[] args)
         {
-            var state = State.MAIN_MENU;
+            var state = MenuState.MAIN_MENU;
             MenuPrinterService.PrintStartUpHeader();
 
-            while(state != State.EXIT)
+            while (state != MenuState.EXIT)
             {
-                if (state == State.MAIN_MENU)
+                if (state == MenuState.MAIN_MENU)
                 {
                     MenuPrinterService.PrintUsage();
                     state = MainMenu();
                 }
-                else if(state == State.SOLUTION) 
+                else if (state == MenuState.SOLUTION)
                 {
                     state = SolutionMenu();
                 }
@@ -29,33 +29,33 @@ namespace AdventOfCode2023
             MenuPrinterService.PrintGoodBye();
         }
 
-        private static State MainMenu()
+        private static MenuState MainMenu()
         {
             UserInput = Console.ReadLine();
             if (string.IsNullOrEmpty(UserInput))
             {
-                return State.MAIN_MENU;
+                return MenuState.MAIN_MENU;
             }
 
             UserInput = UserInput.Trim().ToUpper();
             if (UserInput == "Q")
             {
-                return State.EXIT;
+                return MenuState.EXIT;
             }
-            
+
             if (IsValidInput())
             {
-                return State.SOLUTION;
+                return MenuState.SOLUTION;
             }
             else
             {
                 MenuPrinterService.PrintUnknownSelectedSolution(UserInput);
             }
 
-            return State.MAIN_MENU;
+            return MenuState.MAIN_MENU;
         }
 
-        private static State SolutionMenu()
+        private static MenuState SolutionMenu()
         {
             var selectedSolutions = SolutionSelectorService.GetRequestedSolutions(UserInput!);
             if (selectedSolutions.Count == 0)
@@ -67,13 +67,13 @@ namespace AdventOfCode2023
                 if (selectedSolutions.Count > 1)
                 {
                     MenuPrinterService.MultipleParts(selectedSolutions.Count);
-                    while(true)
+                    while (true)
                     {
                         UserInput = Console.ReadLine();
                         UserInput = UserInput!.Trim().ToUpper();
                         if (UserInput == "Q")
                         {
-                            return State.EXIT;
+                            return MenuState.EXIT;
                         }
 
                         if (IsValidInput(selectedSolutions.Count))
@@ -94,7 +94,7 @@ namespace AdventOfCode2023
                 }
             }
 
-            return State.MAIN_MENU;
+            return MenuState.MAIN_MENU;
         }
 
         private static bool IsValidInput(int max = 25)

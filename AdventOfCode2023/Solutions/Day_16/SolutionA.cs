@@ -1,4 +1,4 @@
-﻿using AdventOfCode2023.Models;
+﻿using AdventOfCode.Core.Models;
 using System.Linq;
 
 namespace AdventOfCode2023.Solutions.Day_16

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AdventOfCode2023.Services
+﻿namespace AdventOfCode.Core.Services
 {
     public static class SolutionRunnerService
     {

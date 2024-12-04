@@ -1,15 +1,13 @@
-﻿using System;
-
-namespace AdventOfCode2023.Services
+﻿namespace AdventOfCode.Core.Services
 {
     public class MenuPrinterService
     {
         public static void PrintStartUpHeader()
         {
             Console.WriteLine(@"
-============================================================
-          A D V E N T     O F     C O D E     2023
-============================================================");
+===========================================================
+              A D V E N T     O F     C O D E
+===========================================================");
             PrintBreak();
         }
 

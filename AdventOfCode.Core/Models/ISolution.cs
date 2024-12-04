@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode2023.Models
+﻿namespace AdventOfCode.Core.Models
 {
     public interface ISolution
     {

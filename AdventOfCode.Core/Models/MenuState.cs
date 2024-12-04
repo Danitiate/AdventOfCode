@@ -1,6 +1,6 @@
-﻿namespace AdventOfCode2023.Models
+﻿namespace AdventOfCode.Core.Models
 {
-    public enum State
+    public enum MenuState
     {
         MAIN_MENU = 0,
         SOLUTION = 1,

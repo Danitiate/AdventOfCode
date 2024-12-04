@@ -1,4 +1,4 @@
-﻿# Advent of Code 2023 #
+﻿# Advent of Code #
 
 See the official Advent of Code website:
 <https://adventofcode.com/>
@@ -9,12 +9,6 @@ Advent of Code is an Advent calendar of small programming puzzles for a variety 
 This repository contains my own solutions to every puzzle for every day.
 
 ## Usage ##
-
-```
-# Run Program
-dotnet run --project AdventOfCode2023
-
-```
 
 ```
 # Navigate menu
