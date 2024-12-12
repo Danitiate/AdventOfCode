@@ -28,7 +28,7 @@ namespace AdventOfCode2023Tests
 
             var result = sut.TestSolve(testStringInput);
 
-            Assert.Equal("102", result);
+            Assert.Equal("102", result.Output);
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace AdventOfCode2023Tests
 
             var result = sut.TestSolve(testStringInput);
 
-            Assert.Equal("9", result);
+            Assert.Equal("9", result.Output);
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace AdventOfCode2023Tests
 
             var result = sut.TestSolve(testStringInput);
 
-            Assert.Equal("11", result);
+            Assert.Equal("11", result.Output);
         }
 
         [Fact]
@@ -82,7 +82,7 @@ namespace AdventOfCode2023Tests
 
             var result = sut.TestSolve(testStringInput);
 
-            Assert.Equal("11", result);
+            Assert.Equal("11", result.Output);
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace AdventOfCode2023Tests
 
             var result = sut.TestSolve(testStringInput);
 
-            Assert.Equal("94", result);
+            Assert.Equal("94", result.Output);
         }
     }
 }

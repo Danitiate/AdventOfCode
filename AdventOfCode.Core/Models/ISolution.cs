@@ -2,6 +2,6 @@
 {
     public interface ISolution
     {
-        public void Solve();
+        public SolutionOutput Solve();
     }
 }

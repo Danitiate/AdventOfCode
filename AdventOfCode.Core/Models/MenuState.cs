@@ -4,6 +4,7 @@
     {
         MAIN_MENU = 0,
         SOLUTION = 1,
-        EXIT = 2,
+        CONFIGURATION = 2,
+        EXIT = 3,
     }
 }

@@ -6,21 +6,21 @@ namespace AdventOfCode.Core.Models
     {
         protected List<string> stringInputs = new List<string>();
 
-        public void Solve()
+        public SolutionOutput Solve()
         {
             var filePath = GetFilePath();
             stringInputs = FileReaderService.ReadFile(filePath);
             if (stringInputs.Count > 1) 
             {
-                SolutionRunnerService.RunSolution(GetSolutionOutput);
+                return SolutionRunnerService.RunSolution(GetSolutionOutput);
             }
             else
             {
-                MenuPrinterService.PrintMissingInput(filePath);
+                return SolutionOutput.MissingInputError(filePath);
             }
         }
 
-        public string TestSolve(List<string> testStringInputs)
+        public SolutionOutput TestSolve(List<string> testStringInputs)
         {
             stringInputs = testStringInputs;
             return SolutionRunnerService.RunSolution(GetSolutionOutput);

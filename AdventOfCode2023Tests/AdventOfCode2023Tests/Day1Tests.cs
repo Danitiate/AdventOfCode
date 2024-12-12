@@ -18,7 +18,7 @@ namespace AdventOfCode2023Tests
 
             var result = sut.TestSolve(testStringInput);
 
-            Assert.Equal("SolutionUsingRegex: 142\nSolutionUsingLoops: 142", result);
+            Assert.Equal("SolutionUsingRegex: 142\nSolutionUsingLoops: 142", result.Output);
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace AdventOfCode2023Tests
 
             var result = sut.TestSolve(testStringInput);
 
-            Assert.Equal("SolutionUsingReplace: 281\nSolutionUsingRegex: 281\nSolutionUsingLoops: 281", result);
+            Assert.Equal("SolutionUsingReplace: 281\nSolutionUsingRegex: 281\nSolutionUsingLoops: 281", result.Output);
         }
     }
 }

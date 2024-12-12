@@ -29,7 +29,7 @@ namespace AdventOfCode2023Tests
 
             var result = sut.TestSolve(testStringInput);
 
-            Assert.Equal("62", result);
+            Assert.Equal("62", result.Output);
         }
     }
 }

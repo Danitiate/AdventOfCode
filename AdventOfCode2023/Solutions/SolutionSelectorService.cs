@@ -2,13 +2,13 @@
 
 namespace AdventOfCode2023.Solutions
 {
-    public class SolutionSelectorService
+    public class SolutionSelectorService : ISolutionSelectorService
     {
-        public static List<ISolution> GetRequestedSolutions(string userInput)
+
+        public List<ISolution> GetRequestedSolutions(int selectedDay)
         {
             var solutions = new List<ISolution>();
-            var inputAsInt = int.Parse(userInput);
-            switch (inputAsInt)
+            switch (selectedDay)
             {
                 case 1: solutions.AddRange([new Day_1.SolutionA(), new Day_1.SolutionB()]); break;
                 case 2: solutions.AddRange([new Day_2.SolutionA(), new Day_2.SolutionB()]); break;

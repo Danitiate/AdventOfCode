@@ -20,7 +20,7 @@ namespace AdventOfCode2023Tests
 
             var result = sut.TestSolve(testStringInput);
 
-            Assert.Equal("8", result);
+            Assert.Equal("8", result.Output);
         }
 
         [Fact]
@@ -30,7 +30,7 @@ namespace AdventOfCode2023Tests
 
             var result = sut.TestSolve(testStringInput);
 
-            Assert.Equal("2286", result);
+            Assert.Equal("2286", result.Output);
         }
     }
 }

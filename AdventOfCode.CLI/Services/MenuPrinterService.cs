@@ -1,4 +1,5 @@
-﻿namespace AdventOfCode.Core.Services
+﻿
+namespace AdventOfCode.Core.Services
 {
     public class MenuPrinterService
     {
@@ -83,6 +84,12 @@ ____________________________________________________________");
             }
             Console.WriteLine(computationTime);
             Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        public static void PrintConfigurationChanged(int currentYear)
+        {
+            Console.WriteLine($"Updated configuration to: {currentYear}");
+            PrintBreak();
         }
     }
 }

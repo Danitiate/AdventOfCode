@@ -25,7 +25,7 @@ namespace AdventOfCode2023Tests
 
             var result = sut.TestSolve(testStringInput);
 
-            Assert.Equal("46", result);
+            Assert.Equal("46", result.Output);
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace AdventOfCode2023Tests
 
             var result = sut.TestSolve(testStringInput);
 
-            Assert.Equal("51", result);
+            Assert.Equal("51", result.Output);
         }
     }
 }
